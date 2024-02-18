@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { AfterInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 // buat class dan isikan property yang dibutuhkan
@@ -14,4 +14,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @AfterInsert()
+  logInsert() {
+    console.log('Inserted User with id: ' + this.id);
+  }
 }

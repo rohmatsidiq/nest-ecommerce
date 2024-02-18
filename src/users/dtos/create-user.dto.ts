@@ -1,7 +1,7 @@
 import { IsEmail, IsString } from 'class-validator';
 
 // untuk interface, seperti validasi
-export class UserDto {
+export class CreateUserDto {
   @IsString()
   name: string;
 

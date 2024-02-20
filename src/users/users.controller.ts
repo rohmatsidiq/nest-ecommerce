@@ -1,26 +1,30 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
-import { User } from './user.entity';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @UseInterceptors(SerializeInterceptor) // gunakan midleware
   @Get()
   find() {
     return this.userService.find();
   }
 
+  @UseInterceptors(SerializeInterceptor) // gunakan midleware
   @Get('/:id')
   findOneBy(@Param('id') id: string) {
     return this.userService.findOneBy(parseInt(id));

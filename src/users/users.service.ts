@@ -9,8 +9,9 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  find() {
-    return this.userRepository.find();
+  async find() {
+    const data = await this.userRepository.find();
+    return { success: true, message: 'Berhasil get data', data: data };
   }
 
   async findOneBy(id: number) {
